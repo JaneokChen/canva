@@ -17,6 +17,9 @@ importers:
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
+      fabric:
+        specifier: 5.3.0-browser
+        version: 5.3.0-browser
       lucide-react:
         specifier: ^1.27.0
         version: 1.27.0(react@19.2.4)
@@ -42,6 +45,9 @@ importers:
       '@tailwindcss/postcss':
         specifier: ^4
         version: 4.3.3
+      '@types/fabric':
+        specifier: ^5.3.0
+        version: 5.3.0
       '@types/node':
         specifier: ^20
         version: 20.19.43
@@ -700,6 +706,9 @@ packages:
 
   '@types/estree@1.0.9':
     resolution: {integrity: sha512-GhdPgy1el4/ImP05X05Uw4cw2/M93BCUmnEvWZNStlCzEKME4Fkk+YpoA5OiHNQmoS7Cafb8Xa3Pya8m1Qrzeg==, tarball: https://registry.npmjs.org/@types/estree/-/estree-1.0.9.tgz}
+
+  '@types/fabric@5.3.0':
+    resolution: {integrity: sha512-HIsNsuvyQmsNi0+bT8Q7t5sC8g6e8xAdgZfO7S4HpeFKn0XK1BKrgdRjocM0hsB/vVVT/4M7IBPqqyvbF3Kl5g==, tarball: https://registry.npmjs.org/@types/fabric/-/fabric-5.3.0.tgz}
 
   '@types/json-schema@7.0.15':
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==, tarball: https://registry.npmjs.org/@types/json-schema/-/json-schema-7.0.15.tgz}
@@ -1511,6 +1520,10 @@ packages:
   express@5.2.1:
     resolution: {integrity: sha512-hIS4idWWai69NezIdRt2xFVofaF4j+6INOpJlVOLDO8zXGpUVEVzIYk12UUi2JzjEzWL3IOAxcTubgz9Po0yXw==, tarball: https://registry.npmjs.org/express/-/express-5.2.1.tgz}
     engines: {node: '>= 18'}
+
+  fabric@5.3.0-browser:
+    resolution: {integrity: sha512-q8zJccGVX9SR+l223G1BG842/S6P6QdPeOfDClppG9uw2knkNMKwkpcrAWe186aLUZonu43V+jURhtSuix4OIQ==, tarball: https://registry.npmjs.org/fabric/-/fabric-5.3.0-browser.tgz}
+    engines: {node: '>=14.0.0'}
 
   fast-deep-equal@3.1.3:
     resolution: {integrity: sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==, tarball: https://registry.npmjs.org/fast-deep-equal/-/fast-deep-equal-3.1.3.tgz}
@@ -3532,6 +3545,8 @@ snapshots:
 
   '@types/estree@1.0.9': {}
 
+  '@types/fabric@5.3.0': {}
+
   '@types/json-schema@7.0.15': {}
 
   '@types/json5@0.0.29': {}
@@ -4503,6 +4518,8 @@ snapshots:
       vary: 1.1.2
     transitivePeerDependencies:
       - supports-color
+
+  fabric@5.3.0-browser: {}
 
   fast-deep-equal@3.1.3: {}
 
