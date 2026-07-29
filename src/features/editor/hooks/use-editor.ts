@@ -1,17 +1,19 @@
-import { log } from 'console'
-import React, { useCallback } from 'react'
-import {fabric} from 'fabric'
+import { useCallback } from "react";
+import type { fabric } from "fabric";
 
 export const useEditor = () => {
   const init = useCallback(({
-    initialCanvas, 
-    initialContainer
+    initialCanvas,
+    initialContainer,
   }: {
     initialCanvas: fabric.Canvas;
-    initialContainer: HTMLDivElement
-  })=>{
-    console.log('init editor')
-  }, []) 
+    initialContainer: HTMLDivElement;
+  }) => {
+    // console.log("init editor");
+    initialCanvas.setWidth(initialContainer.offsetHeight)
+    initialCanvas.setWidth(initialContainer.offsetWidth)
 
-  return {init}
-}
+  }, []);
+
+  return { init };
+};
