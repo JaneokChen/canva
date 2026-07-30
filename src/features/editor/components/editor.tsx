@@ -16,6 +16,7 @@ export const Editor = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    console.log("init");
     const canvas = new fabric.Canvas(canvasRef.current, {
       controlsAboveOverlay: true,
       preserveObjectStacking: true,
@@ -25,6 +26,10 @@ export const Editor = () => {
       initialCanvas: canvas,
       initialContainer: containerRef.current!,
     });
+
+    return () => {
+      canvas.dispose();
+    };
   }, [init]);
 
   return (
