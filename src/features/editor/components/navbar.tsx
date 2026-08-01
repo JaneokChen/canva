@@ -12,7 +12,9 @@ import {
 } from "lucide-react";
 
 import { Logo } from "@/features/editor/components/logo";
+import { ActiveTool } from "@/features/editor/types";
 
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -23,7 +25,12 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Hint } from "@/components/hint";
 
-export const Navbar = () => {
+interface NavbarProps {
+  activeTool: ActiveTool;
+  onChangeActiveTool: (too: ActiveTool) => void;
+}
+
+export const Navbar = ({ activeTool, onChangeActiveTool }: NavbarProps) => {
   return (
     <nav className="w-full flex items-center p-4 h-[68px] gap-x-8 border-b lg:pl-[34px]">
       <Logo />
@@ -52,12 +59,22 @@ export const Navbar = () => {
         </DropdownMenu>
         <Separator orientation="vertical" className="mx-2" />
         <Hint label="Select" side="bottom" sideOffset={10}>
-          <Button variant="ghost" size="icon" onClick={() => {}} className="">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => onChangeActiveTool("select")}
+            className={cn(activeTool === "select" && "bg-gray-100")}
+          >
             <MousePointerClick className="size-4" />
           </Button>
         </Hint>
         <Hint label="undo" side="bottom" sideOffset={10}>
-          <Button variant="ghost" size="icon" onClick={() => {}} className="">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => onChangeActiveTool("select")}
+            className=""
+          >
             <Undo2 className="size-4" />
           </Button>
         </Hint>
