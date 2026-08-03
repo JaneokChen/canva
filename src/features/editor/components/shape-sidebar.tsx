@@ -31,7 +31,7 @@ export const ShapeSidebar = ({
     <aside
       className={cn(
         "bg-white relative border-r z-[40] w-[360px] h-full flex flex-col",
-        activeTool === "shapes" ? "visible" : "hidden",
+        activeTool === "shapes" ? "visible" : "hidden"
       )}
     >
       <ToolSidebarHeader
@@ -41,8 +41,14 @@ export const ShapeSidebar = ({
       <ScrollArea>
         <div className="grid grid-col-4 gap-4 p-4">
           <ShapeTool onClick={() => editor?.addCircle()} icon={FaCircle} />
-          <ShapeTool onClick={() => editor?.addSoftRectangle()} icon={FaSquare} />
-          <ShapeTool onClick={() => editor?.addRectangle()} icon={FaSquareFull} />
+          <ShapeTool
+            onClick={() => editor?.addSoftRectangle()}
+            icon={FaSquare}
+          />
+          <ShapeTool
+            onClick={() => editor?.addRectangle()}
+            icon={FaSquareFull}
+          />
           <ShapeTool onClick={() => editor?.addTriangle()} icon={IoTriangle} />
           <ShapeTool
             onClick={() => editor?.addInverseTriangle()}

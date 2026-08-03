@@ -10,6 +10,7 @@ import { Sidebar } from "@/features/editor/components/sidebar";
 import { Toolbar } from "@/features/editor/components/toolbar";
 import { Footer } from "@/features/editor/components/footer";
 import { ShapeSidebar } from "@/features/editor/components/shape-sidebar";
+import { FillColorSidebar } from "@/features/editor/components/fill-color-sidebar";
 import { ActiveTool } from "@/features/editor/types";
 
 export const Editor = () => {
@@ -30,7 +31,7 @@ export const Editor = () => {
 
       setActiveTool(tool);
     },
-    [activeTool],
+    [activeTool]
   );
   const { init, editor } = useEditor();
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -66,8 +67,19 @@ export const Editor = () => {
           activeTool={activeTool}
           onChangeActiveTool={onChangeActiveTool}
         />
+
+        <FillColorSidebar
+          editor={editor}
+          activeTool={activeTool}
+          onChangeActiveTool={onChangeActiveTool}
+        />
         <main className="bg-muted flex-1 overflow-auto relative flex flex-col">
-          <Toolbar />
+          <Toolbar
+            editor={editor}
+            activeTool={activeTool}
+            onChangeActiveTool={onChangeActiveTool}
+            key={JSON.stringify(editor?.canvas.getActiveObject())}
+          />
           <div
             className="flex-1 h-[calc(100%-124px)] bg-muted"
             ref={containerRef}

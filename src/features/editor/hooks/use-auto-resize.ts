@@ -1,5 +1,5 @@
-import React, { useEffect, useCallback } from 'react';
-import { fabric } from 'fabric';
+import React, { useEffect, useCallback } from "react";
+import { fabric } from "fabric";
 interface useAutoResizeProps {
   canvas: fabric.Canvas | null;
   container: HTMLDivElement | null;
@@ -14,42 +14,49 @@ export const useAutoResize = ({ canvas, container }: useAutoResizeProps) => {
 
     canvas.setWidth(width);
     canvas.setHeight(height);
-    
 
-    const center = canvas.getCenter()
-    const zoomRatio = 0.85
-    const localWorkspace = canvas.getObjects().find((object)=> object.name === 'clip' )
+    const center = canvas.getCenter();
+    const zoomRatio = 0.85;
+    const localWorkspace = canvas
+      .getObjects()
+      .find((object) => object.name === "clip");
 
     // @ts-expect-error findScaleToFit does not exist in type, but the method acutally do exist
     const scale = fabric.util.findScaleToFit(localWorkspace, {
-      width, 
-      height, 
-    })
+      width,
+      height,
+    });
 
-    const zoom = zoomRatio * scale
+    const zoom = zoomRatio * scale;
 
-    canvas.setViewportTransform(fabric.iMatrix.concat())
-    canvas.zoomToPoint(new fabric.Point(center.left, center.top), zoom)
+    canvas.setViewportTransform(fabric.iMatrix.concat());
+    canvas.zoomToPoint(new fabric.Point(center.left, center.top), zoom);
 
-    if(!localWorkspace) return;
+    if (!localWorkspace) return;
 
-    const workspaceCenter = localWorkspace.getCenterPoint()
+    const workspaceCenter = localWorkspace.getCenterPoint();
     const viewportTransform = canvas.viewportTransform;
 
-    if(canvas.width === undefined || canvas.height === undefined || !viewportTransform){
+    if (
+      canvas.width === undefined ||
+      canvas.height === undefined ||
+      !viewportTransform
+    ) {
       return;
     }
 
     const nextViewportTransform = viewportTransform.concat();
-    nextViewportTransform[4] = canvas.width / 2 - workspaceCenter.x * nextViewportTransform[0]
-    nextViewportTransform[5] = canvas.height / 2 - workspaceCenter.y * nextViewportTransform[3]
+    nextViewportTransform[4] =
+      canvas.width / 2 - workspaceCenter.x * nextViewportTransform[0];
+    nextViewportTransform[5] =
+      canvas.height / 2 - workspaceCenter.y * nextViewportTransform[3];
 
-    canvas.setViewportTransform(nextViewportTransform)
+    canvas.setViewportTransform(nextViewportTransform);
 
     localWorkspace.clone((cloned: fabric.Rect) => {
-      canvas.clipPath = cloned
-      canvas.requestRenderAll()
-    })
+      canvas.clipPath = cloned;
+      canvas.requestRenderAll();
+    });
   }, [canvas, container]);
 
   useEffect(() => {
