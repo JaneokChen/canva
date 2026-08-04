@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-
+import React from "react";
+import { BsBorderWidth } from "react-icons/bs";
 import { Editor, ActiveTool } from "@/features/editor/types";
 
 import { cn } from "@/lib/utils";
@@ -59,6 +59,18 @@ export const Toolbar = ({
                 borderColor: strokeColor,
               }}
             />
+          </Button>
+        </Hint>
+      </div>
+      <div className="flex items-start h-full justify-center">
+        <Hint label="Stroke width" side="bottom" sideOffset={5}>
+          <Button
+            onClick={() => onChangeActiveTool("stroke-width")}
+            size="icon"
+            variant="ghost"
+            className={cn(activeTool === "stroke-width" && "bg-gray-100")}
+          >
+            <BsBorderWidth className="size-4" />
           </Button>
         </Hint>
       </div>
