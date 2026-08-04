@@ -6,6 +6,7 @@ import { Editor, ActiveTool } from "@/features/editor/types";
 import { cn } from "@/lib/utils";
 import { Hint } from "@/components/hint";
 import { Button } from "@/components/ui/button";
+import { RxTransparencyGrid } from "react-icons/rx";
 
 interface ToolbarProps {
   editor: Editor | undefined;
@@ -94,6 +95,18 @@ export const Toolbar = ({
             variant="ghost"
           >
             <ArrowDown className="size-4" />
+          </Button>
+        </Hint>
+      </div>
+      <div className="flex items-start h-full justify-center">
+        <Hint label="Opacity" side="bottom" sideOffset={5}>
+          <Button
+            onClick={() => onChangeActiveTool("opacity")}
+            size="icon"
+            variant="ghost"
+            className={cn(activeTool === "opacity" && "bg-gray-100")}
+          >
+            <RxTransparencyGrid className="size-4" />
           </Button>
         </Hint>
       </div>
