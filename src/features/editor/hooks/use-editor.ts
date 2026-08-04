@@ -11,6 +11,7 @@ import {
   RECTANGLE_OPTIONS,
   TRIANGLE_OPTIONS,
   DIAMOND_OPTIONS,
+  EditorHookProps,
 } from "@/features/editor/types";
 import { isTextType } from "@/features/editor/utils";
 
@@ -159,14 +160,36 @@ const buildEditor = ({
       addToCanvas(object);
     },
     canvas,
-    fillColor,
-    strokeColor,
+    getActiveFillColor: () => {
+      const selectedObject = selectedObjects[0];
+
+      if (!selectedObject) {
+        return fillColor;
+      }
+
+      const value = selectedObject.get("fill") || fillColor;
+
+      // currently, gradients & patterns are not supported
+      return value as string;
+    },
+    getActiveStrokeColor: () => {
+      const selectedObject = selectedObjects[0];
+
+      if (!selectedObject) {
+        return fillColor;
+      }
+
+      const value = selectedObject.get("stroke") || strokeColor;
+
+      // currently, gradients & patterns are not supported
+      return value;
+    },
     strokeWidth,
     selectedObjects,
   };
 };
 
-export const useEditor = () => {
+export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
   const [canvas, setCanvas] = useState<fabric.Canvas | null>(null);
   const [container, setContainer] = useState<HTMLDivElement | null>(null);
   const [selectedObjects, setSelectedObjects] = useState<fabric.Object[]>([]);
@@ -183,6 +206,7 @@ export const useEditor = () => {
   useCanvasEvents({
     canvas,
     setSelectedObjects,
+    clearSelectionCallback,
   });
 
   const editor = useMemo(() => {
