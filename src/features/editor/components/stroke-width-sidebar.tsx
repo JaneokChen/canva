@@ -84,7 +84,8 @@ export const StrokeWidthSidebar = ({
             size="lg"
             className={cn(
               "w-full h-16 justify-start text-left",
-              JSON.stringify(typeValue) === `[5,5]` && "border border-blue-500"
+              JSON.stringify(typeValue) === `[5,5]` &&
+                "border-2 border-blue-500"
             )}
             style={{ padding: "8px 16px" }}
           >
