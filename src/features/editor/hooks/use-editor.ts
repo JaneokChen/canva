@@ -1,5 +1,6 @@
 import { useCallback, useState, useMemo } from "react";
 import { fabric } from "fabric";
+import { ITextboxOptions } from "fabric/fabric-impl";
 
 import {
   BuildEditorProps,
@@ -15,6 +16,7 @@ import {
   EditorHookProps,
   TEXT_OPTIONS,
   FONT_FAMILY,
+  FONT_WEIGHT,
 } from "@/features/editor/types";
 import { isTextType } from "@/features/editor/utils";
 
@@ -75,6 +77,119 @@ const buildEditor = ({
 
       // currently, gradients & patterns are not supported
       return value;
+    },
+    changeFontStyle: (value: string) => {
+      canvas.getActiveObjects().forEach((object) => {
+        if (isTextType(object.type)) {
+          // @ts-ignore
+          // Faulty ts library, fontStyle exists
+          object.set({ fontStyle: value });
+        }
+      });
+
+      canvas.renderAll();
+    },
+    getActiveFontStyle: () => {
+      const selectedObject = selectedObjects[0];
+
+      if (!selectedObject) {
+        return "normal";
+      }
+
+      // @ts-ignore
+      // Faulty ts library, fontStyle exists
+      const value = selectedObject?.get("fontStyle") || "normal";
+
+      // currently, gradients & patterns are not supported
+      return value;
+    },
+
+    changeTextAlign: (value: string) => {
+      canvas.getActiveObjects().forEach((object) => {
+        if (isTextType(object.type)) {
+          // @ts-ignore
+          // Faulty ts library, textAlign exists
+          object.set({ textAlign: value });
+        }
+      });
+      canvas.renderAll();
+    },
+    getActiveTextAlign: () => {
+      const selectedObject = selectedObjects[0];
+
+      if (!selectedObject) {
+        return "left";
+      }
+
+      // @ts-ignore
+      // Faulty ts library, textAlign exists
+      const value = selectedObject.get("textAlign") || "left";
+
+      // currently, gradients & patterns are not supported
+      return value;
+    },
+    changeFontUnderline: (value: boolean) => {
+      canvas.getActiveObjects().forEach((object) => {
+        if (isTextType(object.type)) {
+          // @ts-ignore
+          // Faulty ts library, underline exists
+          object.set({ underline: value });
+        }
+      });
+      canvas.renderAll();
+    },
+    getActiveFontUnderline: () => {
+      const selectedObject = selectedObjects[0];
+
+      if (!selectedObject) {
+        return false;
+      }
+
+      // @ts-ignore
+      // Faulty ts library, underline exists
+      const value = selectedObject.get("underline") || false;
+
+      // currently, gradients & patterns are not supported
+      return value;
+    },
+
+    changeFontLinethrough: (value: boolean) => {
+      canvas.getActiveObjects().forEach((object) => {
+        if (isTextType(object.type)) {
+          // @ts-ignore
+          // Faulty ts library, linethrough exists
+          object.set({ linethrough: value });
+        }
+      });
+      canvas.renderAll();
+    },
+    getActiveFontLinethrough: () => {
+      const selectedObject = selectedObjects[0];
+
+      if (!selectedObject) {
+        return false;
+      }
+
+      // @ts-ignore
+      // Faulty ts library, linethrough exists
+      const value = selectedObject.get("linethrough") || false;
+
+      // currently, gradients & patterns are not supported
+      return value;
+    },
+    changeFontWeight: (value: number) => {
+      canvas.getActiveObjects().forEach((object) => {
+        if (isTextType(object.type)) {
+          // @ts-ignore
+          // Faulty ts library, fontFamily exists
+          object.set({ fontWeight: value });
+        }
+
+        object.set({
+          opacity: value,
+        });
+      });
+      canvas.renderAll();
     },
     changeOpacity: (value: number) => {
       canvas.getActiveObjects().forEach((object) => {
@@ -242,6 +357,20 @@ const buildEditor = ({
       addToCanvas(object);
     },
     canvas,
+    getActiveFontWeight: () => {
+      const selectedObject = selectedObjects[0];
+
+      if (!selectedObject) {
+        return FONT_WEIGHT;
+      }
+
+      // @ts-ignore
+      // Faulty ts library, fontWeight exists
+      const value = selectedObject.get("fontWeight") || FONT_WEIGHT;
+
+      // currently, gradients & patterns are not supported
+      return value;
+    },
     getActiveFontFamily: () => {
       const selectedObject = selectedObjects[0];
 
