@@ -6,22 +6,22 @@ const DEFAULT_COUNT = 50;
 const DEFAULT_COLLECTION_IDS = ["317099"];
 
 const app = new Hono().get("/", async (c) => {
-  const images = await unsplash.photos.getRandom({
-    collectionIds: DEFAULT_COLLECTION_IDS,
-    count: DEFAULT_COUNT,
+  const { data, error } = await unsplash.GET("/photos/random", {
+    params: {
+      query: {
+        collections: DEFAULT_COLLECTION_IDS,
+        count: DEFAULT_COUNT,
+      },
+    },
   });
 
-  if (images.errors) {
+  if (error || !data) {
     return c.json({ error: "something went wrong" }, 400);
   }
 
-  let response = images.response;
+  const images = Array.isArray(data) ? data : [data];
 
-  if (!Array.isArray(response)) {
-    response = [response];
-  }
-
-  return c.json({ data: response });
+  return c.json({ data: images });
 });
 
 export default app;
