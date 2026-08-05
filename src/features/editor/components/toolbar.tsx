@@ -6,6 +6,7 @@ import {
   AlignLeft,
   AlignCenter,
   AlignRight,
+  Trash,
 } from "lucide-react";
 import { BsBorderWidth } from "react-icons/bs";
 import { RxTransparencyGrid } from "react-icons/rx";
@@ -370,6 +371,14 @@ export const Toolbar = ({
             className={cn(activeTool === "opacity" && "bg-gray-100")}
           >
             <RxTransparencyGrid className="size-4" />
+          </Button>
+        </Hint>
+      </div>
+
+      <div className="flex items-start h-full justify-center">
+        <Hint label="Delete" side="bottom" sideOffset={5}>
+          <Button onClick={() => editor?.delete()} size="icon" variant="ghost">
+            <Trash className="size-4" />
           </Button>
         </Hint>
       </div>
