@@ -17,6 +17,7 @@ import {
   TEXT_OPTIONS,
   FONT_FAMILY,
   FONT_WEIGHT,
+  FONT_SIZE,
 } from "@/features/editor/types";
 import { isTextType } from "@/features/editor/utils";
 
@@ -99,6 +100,31 @@ const buildEditor = ({
       // @ts-ignore
       // Faulty ts library, fontStyle exists
       const value = selectedObject?.get("fontStyle") || "normal";
+
+      // currently, gradients & patterns are not supported
+      return value;
+    },
+
+    changeFontSize: (value: number) => {
+      canvas.getActiveObjects().forEach((object) => {
+        if (isTextType(object.type)) {
+          // @ts-ignore
+          // Faulty ts library, fontSize exists
+          object.set({ fontSize: value });
+        }
+      });
+      canvas.renderAll();
+    },
+    getActiveFontSize: () => {
+      const selectedObject = selectedObjects[0];
+
+      if (!selectedObject) {
+        return FONT_SIZE;
+      }
+
+      // @ts-ignore
+      // Faulty ts library, fontSize exists
+      const value = selectedObject.get("fontSize") || FONT_SIZE;
 
       // currently, gradients & patterns are not supported
       return value;

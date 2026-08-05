@@ -15,7 +15,15 @@ import { cn } from "@/lib/utils";
 
 import { Hint } from "@/components/hint";
 import { Button } from "@/components/ui/button";
-import { Editor, ActiveTool, FONT_WEIGHT } from "@/features/editor/types";
+
+import {
+  Editor,
+  ActiveTool,
+  FONT_WEIGHT,
+  FONT_SIZE,
+} from "@/features/editor/types";
+import { FontSizeInput } from "@/features/editor/components/font-size-input";
+
 import { isTextType } from "@/features/editor/utils";
 
 interface ToolbarProps {
@@ -37,6 +45,7 @@ export const Toolbar = ({
   const initialFontLinethrough = editor?.getActiveFontLinethrough();
   const initialFontUnderline = editor?.getActiveFontUnderline();
   const initialTextAlign = editor?.getActiveTextAlign();
+  const initialFontSize = editor?.getActiveFontSize() || FONT_SIZE;
 
   const selectedObject = editor?.selectedObjects[0];
   const selectedObjectType = editor?.selectedObjects[0]?.type;
@@ -52,7 +61,20 @@ export const Toolbar = ({
     fontLinethrough: initialFontLinethrough,
     fontUnderline: initialFontUnderline,
     textAlign: initialTextAlign,
+    fontSize: initialFontSize,
   });
+
+  const onChangeFontSize = (value: number) => {
+    if (!selectedObject) {
+      return;
+    }
+
+    editor?.changeFontSize(value);
+    setProperties((current) => ({
+      ...current,
+      fontSize: value,
+    }));
+  };
 
   const onChangeTextAlign = (value: string) => {
     if (!selectedObject) {
@@ -302,6 +324,17 @@ export const Toolbar = ({
             >
               <AlignRight className="size-4" />
             </Button>
+          </Hint>
+        </div>
+      )}
+
+      {isText && (
+        <div className="flex items-start h-full justify-center">
+          <Hint label="Align right" side="bottom" sideOffset={5}>
+            <FontSizeInput
+              value={properties.fontSize}
+              onChange={onChangeFontSize}
+            />
           </Hint>
         </div>
       )}
