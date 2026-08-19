@@ -7,6 +7,7 @@ import {
   AlignCenter,
   AlignRight,
   Trash,
+  Copy,
 } from "lucide-react";
 import { TbColorFilter } from "react-icons/tb";
 import { BsBorderWidth } from "react-icons/bs";
@@ -382,6 +383,7 @@ export const Toolbar = ({
           </Button>
         </Hint>
       </div>
+
       <div className="flex items-start h-full justify-center">
         <Hint label="Opacity" side="bottom" sideOffset={5}>
           <Button
@@ -391,6 +393,21 @@ export const Toolbar = ({
             className={cn(activeTool === "opacity" && "bg-gray-100")}
           >
             <RxTransparencyGrid className="size-4" />
+          </Button>
+        </Hint>
+      </div>
+
+      <div className="flex items-start h-full justify-center">
+        <Hint label="Duplicate" side="bottom" sideOffset={5}>
+          <Button
+            onClick={() => {
+              editor?.onCopy();
+              editor?.onPaste();
+            }}
+            size="icon"
+            variant="ghost"
+          >
+            <Copy className="size-4" />
           </Button>
         </Hint>
       </div>
