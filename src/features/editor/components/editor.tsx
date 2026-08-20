@@ -170,7 +170,7 @@ export const Editor = () => {
             <canvas ref={canvasRef} />
             {/* editor components */}
           </div>
-          <Footer />
+          <Footer editor={editor} />
         </main>
       </div>
     </div>
