@@ -12,6 +12,7 @@ export const JSON_KEYS = [
   "extensionType",
   "extension",
 ];
+
 export const filters = [
   "none",
   "polaroid",
@@ -195,6 +196,11 @@ export type BuildEditorProps = {
 };
 
 export interface Editor {
+  savePng: () => void;
+  saveSvg: () => void;
+  saveJpg: () => void;
+  saveJson: () => void;
+  loadJson: (json: string) => void;
   onUndo: () => void;
   onRedo: () => void;
   canUndo: () => boolean;
