@@ -34,7 +34,7 @@ export const AiSidebar = ({
       { prompt: value },
       {
         onSuccess: ({ data }) => {
-          editor?.addImage(data);
+          editor?.addImage(data ?? "");
         },
       }
     );
