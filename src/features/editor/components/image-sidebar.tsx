@@ -85,7 +85,7 @@ export const ImageSidebar = ({
                     <Image
                       fill
                       src={image.urls.small}
-                      alt={image.alt_description || "Image"}
+                      alt={image.description || "Image"}
                       className="object-cover"
                     />
 
