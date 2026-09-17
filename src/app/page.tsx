@@ -1,11 +1,6 @@
 // import { Button } from "@/components/ui/button";
+import { Editor } from "@/features/editor/components/editor";
 
 export default function Home() {
-  return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      {/* <Button size="sm" variant="destructive"> */}
-      Click me
-      {/* </Button> */}
-    </div>
-  );
+  return <Editor />;
 }
