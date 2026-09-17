@@ -56,7 +56,7 @@ export const Navbar = ({
       <Logo />
       <div className="w-full flex items-center gap-x-1 h-full">
         <DropdownMenu modal={false}>
-          <DropdownMenuTrigger asChild>
+          <DropdownMenuTrigger>
             <Button size="sm" variant="ghost">
               File
               <ChevronDown className="size-4 ml-2" />
